@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for log/statistics.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">log/</a> statistics.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>35/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.91% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>10/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>7/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>35/35</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * @file 功能统计相关
+ * @author lvlei(lvlei03@baidu.com)
+ */
+&nbsp;
+import {uniqArray} from '../utils';
+&nbsp;
+export default class Statistics {
+    constructor(swaninterface) {
+        this.swaninterface = swaninterface;
+    }
+&nbsp;
+    /**
+     * 自定义组件的使用统计
+     *
+     * @param {Object} pagesQueue - 所有页面信息
+     */
+    customComponentStatistics(pagesQueue, virtualComponentFactory, customComponentsSizeInfo) {
+        try {
+            let ext = {};
+            let type = '';
+            if (customComponentsSizeInfo) {
+                ext = customComponentsSizeInfo;
+                type = 'customsize';
+            } else {
+                const virtualClassInfo = virtualComponentFactory.virtualClassInfo;
+                const appInfo = this.swaninterface.boxjs.data.get({name: 'swan-appInfoSync'});
+                const systemInfo = this.swaninterface.boxjs.device.systemInfo({type: 'sync'});
+                // 小程序页面数量
+                const allPagesNum = Object.keys(pagesQueue).length;
+&nbsp;
+                // 将原始map备份并改造成使用过自定义组件的pagesQueue
+                const usedCustomComponentPages = Object.keys(pagesQueue)
+                    .reduce((pages, item) =&gt; {
+                        if (pagesQueue[item].usingComponents.length) {
+                            pages[item] = pagesQueue[item];
+                        }
+                        return pages;
+                    }, {});
+&nbsp;
+                // 使用过自定义组件的页面数量
+                const usedCustomComponentPagesNum = Object.keys(usedCustomComponentPages).length;
+                const getUsingComponentsArrayForPage = (usingComponentsArray, allUsingComponentsArray = []) =&gt; {
+                    usingComponentsArray.forEach(path =&gt; {
+                        <span class="missing-if-branch" title="else path not taken" >E</span>if (!allUsingComponentsArray.includes(path)) {
+                            allUsingComponentsArray.push(path);
+                            let componentsusingComponentsArray
+                            = virtualClassInfo[path]['componentProto']['usingComponents'];
+                            if (componentsusingComponentsArray &amp;&amp; componentsusingComponentsArray.length) {
+                                allUsingComponentsArray = getUsingComponentsArrayForPage(componentsusingComponentsArray,
+                                    allUsingComponentsArray);
+                            }
+                        }
+                    });
+                    return allUsingComponentsArray;
+                };
+                // 所有页面使用的所有自定义组件（页面内去重）
+                let allPagesUsingComponents = [];
+                // 使用过自定义组件的页面, 其使用到的自定义组件数量
+                const list = Object.keys(usedCustomComponentPages)
+                    .map(path =&gt; {
+                        let allUsingComponentsArrayForPage
+                        = getUsingComponentsArrayForPage(usedCustomComponentPages[path].usingComponents);
+                        let uniqedAllUsingComponentsArrayForPage = uniqArray(allUsingComponentsArrayForPage);
+                        allPagesUsingComponents = allPagesUsingComponents.concat(uniqedAllUsingComponentsArrayForPage);
+                        return {
+                            path,
+                            num: uniqedAllUsingComponentsArrayForPage.length
+                        };
+                    });
+                // 所有被使用的自定义组件（所有页面一起去重）
+                let allUsingComponents = uniqArray(allPagesUsingComponents);
+                ext = {
+                    appkey: appInfo.appid,
+                    appVersion: systemInfo.SDKVersion,
+                    allPagesNum,
+                    usedCustomComponentPagesNum,
+                    list,
+                    allPagesUsingComponentsNum: allPagesUsingComponents.length,
+                    allUsingComponentsNum: allUsingComponents.length
+                };
+            }
+&nbsp;
+            // 上传数据
+            this.swaninterface.boxjs.log({
+                name: 'ubcReport',
+                data: {
+                    actionId: 875,
+                    value: {
+                        from: 'swan',
+                        type,
+                        ext
+                    }
+                }
+            });
+        } catch (err) {
+            console.error(`customComponentStatistics error: ${err}`);
+        }
+    }
+&nbsp;
+    /**
+     * 将日志分阶段上报的到客户端
+     *
+     * @param  {Object} stageLogList 分阶段日志上报数据
+     */
+    sendStageMessage(stageLogList) {
+        this.swaninterface.boxjs.log({
+            name: 'ubcFlowJar',
+            data: {
+                flowId: '671',
+                data: stageLogList
+            }
+        });
+    }
+&nbsp;
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Apr 17 2019 17:06:00 GMT+0800 (CST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

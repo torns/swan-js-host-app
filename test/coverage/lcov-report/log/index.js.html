@@ -1,0 +1,1772 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for log/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">log/</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>216/216</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">95.65% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>88/92</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>19/19</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>215/215</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-yes">156×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30×</span>
+<span class="cline-any cline-yes">29×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-yes">45×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * @file 框架的打点入口
+ * @author sunweinan(sunweinan@baidu.com)
+ *         lvlei(lvei03@baidu.com)
+ */
+&nbsp;
+/* globals swanGlobal _naSwan */
+import EventsEmitter from '@baidu/events-emitter';
+import PerformanceLog from './performanceLog';
+import ExceptionMonitor from './exception-monitor';
+import {initProductLogEvents} from './productLog';
+import Statistics from './statistics';
+&nbsp;
+export default class Log {
+&nbsp;
+    /**
+     * 日志系统构造方法
+     *
+     * @param {Object} global - 全局对象
+     * @param {Object} swaninterface - 接口方法
+     * @param {string} role - 当前环境 (master|slave)
+     */
+    constructor(global, swaninterface, role = 'master') {
+        this.global = global;
+        this.swaninterface = swaninterface;
+        this.performanceLog = new PerformanceLog(swaninterface);
+        this.exceptionMonitor = new ExceptionMonitor(swaninterface);
+        this.statistics = new Statistics(swaninterface);
+        this.swanEvents = global.swanEvents;
+        this.reportFPData = false;
+        this.registerLog(role);
+        this.logEventsSpecialListener(role);
+        Log.stageList.statistics = this.statistics;
+        this.global._swanTraceList = [];
+        Log.stageList.global = this.global;
+    }
+&nbsp;
+    /**
+     * 注册所有类别log的监听器
+     *
+     * @param {string} role - 角色(master|slave)
+     */
+    registerLog(role) {
+        // swanEvents统一在此接收
+        this.swanEvents.onMessage('TraceEvents', event =&gt; {
+            // 没有参数直接中断
+            if (!event || !event.params) {
+                return false;
+            }
+            const eventName = event.params.eventName || '';
+            const data = event.params.data;
+            this.reportMtjMiniSDK(eventName, data);
+            this.executeExceptionMointor(eventName, data);
+            this.executePerformPanel(eventName, data);
+            this.executeStageEvent(role, eventName, data);
+        });
+    }
+&nbsp;
+    /**
+     * 各阶段事件处理环境
+     *
+     * @param {string} role - 角色(master|slave)
+     * @param {string} eventName 框架阶段事件名
+     * @param {*} data 通过事件传递的数据
+     */
+    executeStageEvent(role, eventName, data) {
+        role === 'master'
+        ? this.master(eventName, data)
+        : this.slave(eventName, data);
+    }
+&nbsp;
+    // 内存中维护需要上报给ubcflow的list
+    static perfLogList = {
+        // 存放的最终上传给端上的日志的数据
+        __list: [],
+        add(name) {
+            if ((!Log.logMessageSended)
+                &amp;&amp; ~this.__list.findIndex(item =&gt; item &amp;&amp; item.actionId === name)) {
+                return;
+            }
+&nbsp;
+            if (!Log.logMessageSended || Log.logOnNewScheme === true) {
+                this.__list.push({
+                    actionId: name,
+                    timestamp: Date.now()
+                });
+            }
+        },
+&nbsp;
+        // 清空master之前的日志
+        clearLog() {
+            this.__list = [];
+        }
+    };
+&nbsp;
+    /**
+     * 稳定性打点所需要的阶段数据【TODO: 新方式收敛一段时间, 再去掉旧方案】
+     */
+    static stageList = {
+        list: [],
+        add(name) {
+            if (!Log.logMessageSended) {
+                if (~this.list.findIndex(item =&gt; item &amp;&amp; item.actionId === name)) {
+                    return false;
+                }
+                this.list.push({
+                    actionId: name,
+                    timestamp: Date.now()
+                });
+            }
+        },
+        send() {
+            if (!Log.logMessageSended) {
+                this.statistics.sendStageMessage(this.list);
+                this.list = [];
+            }
+        },
+        // 对于阶段信息的收藏, 便于客户端主动提取
+        store(name) {
+            this.global._swanTraceList.push({
+                actionId: name,
+                timestamp: Date.now() + ''
+            });
+        }
+    };
+&nbsp;
+    // 只首次打开上报一次
+    static logMessageSended = false;
+&nbsp;
+    // 标记本次日志发送是否是因为一个新的scheme而产生的
+    static logOnNewScheme = false;
+&nbsp;
+    /**
+     * 百度统计的log
+     *
+     * @param {string} eventName - 事件名
+     */
+    reportMtjMiniSDK(eventName) {
+        if (eventName === 'masterPreloadContextDecorated') {
+            const {
+                pageLifeCycleEventEmitter,
+                appLifeCycleEventEmitter,
+                swanEventsCommunicator
+            } = this.global.masterManager;
+            const logEventsCommunicator = EventsEmitter.merge(
+                this.swanEvents,
+                swanEventsCommunicator,
+                pageLifeCycleEventEmitter,
+                appLifeCycleEventEmitter
+            );
+            initProductLogEvents(logEventsCommunicator, this.swaninterface);
+        }
+    }
+&nbsp;
+    /**
+     * 框架流程异常事件处理
+     *
+     * @param {string} eventName - 事件名
+     * @param {*} data - 传递的数据
+     */
+    executeExceptionMointor(eventName, data) {
+        // 阶段名区分
+        let stage;
+        switch (true) {
+            case eventName.includes('masterPreload'): {
+                stage = 1;
+                break;
+            }
+            case eventName.includes('masterActive'): {
+                stage = 3;
+                break;
+            }
+            case eventName.includes('slavePreload'): {
+                stage = 2;
+                break;
+            }
+            case eventName.includes('slaveActive'): {
+                stage = 4;
+                break;
+            }
+            default:
+        }
+&nbsp;
+        // 各阶段上报时机
+        switch (eventName) {
+            case 'masterActiveCreatePageFlowStart': {
+                this.exceptionMonitor.setUserTrack(data.uri);
+                break;
+            }
+            case 'masterPreloadStart': {
+                this.exceptionMonitor.delayToSendExceptionStage(1);
+                break;
+            }
+            case 'slavePreloadStart': {
+                this.exceptionMonitor.delayToSendExceptionStage(2);
+                break;
+            }
+            case 'masterActiveStart': {
+                this.exceptionMonitor.delayToSendExceptionStage(3);
+                break;
+            }
+            case 'slaveActiveStart': {
+                // 兼容旧版swanjs
+                this.global.pageRender &amp;&amp; this.exceptionMonitor.delayToSendExceptionStage(4);
+                break;
+            }
+        }
+        stage &amp;&amp; this.exceptionMonitor.collectEvents(stage, eventName);
+    }
+&nbsp;
+    /**
+     * 客户端记录log处理
+     *
+     * @param {string} eventName - 事件名
+     * @param {*} data - 触发事件传递的数据
+     */
+    executePerformPanel(eventName, data) {
+        // 拿到端上关于是否显示性能面板开关的环境变量
+        let showPerformancePanel = global.showPerformancePanel;
+        // 如果全局有标记位并且不为true，就说明端上的环境变量传递成功且为false
+        if (showPerformancePanel !== undefined &amp;&amp; showPerformancePanel !== 'true') {
+            return;
+        }
+        const addPerformPanel = type =&gt; {
+            const perfAudit = this.global.masterManager.perfAudit;
+            perfAudit[type] = parseInt(data.timestamp, 10);
+            this.performanceLog.addPerformPanel([{
+                slaveId: data.slaveId,
+                actionName: eventName,
+                timestamp: data.timestamp
+            }]);
+        };
+&nbsp;
+        const performPanelEvents = {
+            slaveActiveRenderEnd() {
+                this.performanceLog.performPanelHelper(
+                    data.slaveId,
+                    this.global.pageInitRenderStart,
+                    'pageInitRender'
+                );
+            },
+            pageSwitchStart() {
+                addPerformPanel('slave_navigator_start');
+            },
+            pageSwitchEnd() {
+                addPerformPanel('slave_navigator_rendered');
+            },
+            pageDataUpdate() {
+                this.performanceLog.performPanelHelper(data.slaveId, data.timestamp);
+            }
+        };
+&nbsp;
+        // 反射客户端记录log处理事件
+        try {
+            performPanelEvents[eventName] &amp;&amp; performPanelEvents[eventName].call(this);
+        } catch (err) {
+            console.error(`execute performPanelEvents event '${eventName}' error!`);
+        }
+    }
+&nbsp;
+    /**
+     * 阶段性事件处理(master), 各阶段事件处理在此扩展
+     *
+     * @param {string} eventName - 事件名
+     */
+    master(eventName) {
+        const masterEventsMap = {
+            masterPreloadEnd() {
+                Log.perfLogList.add('master_js_parsed');
+                Log.stageList.add('masterPreloadEnd');
+                Log.stageList.store('masterPreloadEnd');
+                Log.stageList.send();
+            },
+            masterLogicStart() {
+                Log.perfLogList.add('fe_master_logic_start');
+            },
+            masterActiveStart() {
+                Log.perfLogList.add('fe_master_dispatch_start');
+                Log.stageList.add('masterActiveStart');
+                this.global.masterManager.perfAudit['fe_master_dispatch_start'] = Date.now();
+            },
+            masterActiveAppJsLoaded() {
+                Log.perfLogList.add('fe_end_load_app_js');
+                Log.stageList.add('masterActiveAppJsLoaded');
+                Log.stageList.store('masterActiveAppJsLoaded');
+            },
+            masterActiveSendInitdataEnd() {
+                Log.perfLogList.add('master_first_init_data');
+                Log.stageList.add('masterActiveSendInitdataEnd');
+                Log.stageList.store('masterActiveSendInitdataEnd');
+                Log.stageList.send();
+            },
+            masterOnAppLaunchHookStart() {
+                Log.perfLogList.add('master_app_launch_start');
+                Log.stageList.add('masterOnAppLaunchHookStart');
+                Log.stageList.store('masterOnAppLaunchHookStart');
+            },
+            masterOnAppLaunchHookEnd() {
+                Log.perfLogList.add('master_app_launch_end');
+                Log.stageList.add('masterOnAppLaunchHookEnd');
+                Log.stageList.store('masterOnAppLaunchHookEnd');
+            },
+            masterPageOnLoadHookStart() {
+                Log.perfLogList.add('master_page_onload_start');
+                Log.stageList.add('masterPageOnLoadHookStart');
+                Log.stageList.store('masterPageOnLoadHookStart');
+            },
+            masterPageOnLoadHookEnd() {
+                Log.perfLogList.add('master_page_onload_end');
+                Log.stageList.add('masterPageOnLoadHookEnd');
+                Log.stageList.store('masterPageOnLoadHookEnd');
+            },
+            masterActiveInitAction() {
+                Log.perfLogList.add('init_action');
+                Log.stageList.add('masterActiveInitAction');
+                Log.stageList.store('masterActiveInitAction');
+                Log.stageList.send();
+            },
+            // 热启动的情况下，相同的小程序被不同scheme启动
+            // 在小程序被拉回的时候，实际上页面是没有被重新渲染过的，这里发送日志的终点方便统计
+            masterFePageShow() {
+                // 该值表示是从后台无刷新的拉回，即热启动不刷新的情况
+                Log.perfLogList.add('fe_page_show');
+                this.performanceLog.sendLogMessage(Log.perfLogList.__list || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>;
+                Log.logOnNewScheme = false;
+            },
+            masterOnNewScheme() {
+                // 该值表示是从后台通过一个新的scheme拉回，即热启动的情况
+                Log.perfLogList.clearLog();
+                Log.logOnNewScheme = true;
+                Log.perfLogList.add('fe_master_relaunch_start');
+            },
+            customComponentStatistics() {
+                this.statistics.customComponentStatistics(this.global.masterManager.pagesQueue,
+                    this.global.masterManager.virtualComponentFactory);
+            }
+        };
+&nbsp;
+        // 反射框架master事件
+        try {
+            masterEventsMap[eventName] &amp;&amp; masterEventsMap[eventName].call(this);
+        } catch (err) {
+            console.error(`execute master event '${eventName}' error! ${err}`);
+        }
+    }
+&nbsp;
+    /**
+     * 阶段性事件处理(slave), 各阶段事件处理在此扩展
+     *
+     * @param {string} eventName - 事件名
+     * @param {*} data - 触发事件传递的数据
+     */
+    slave(eventName, data) {
+        const slaveEventsMap = {
+            slavePreloadEnd() {
+                Log.stageList.add('slavePreloadEnd');
+                Log.stageList.store('slavePreloadEnd');
+                Log.stageList.send();
+            },
+            slaveActiveJsParsed() {
+                Log.perfLogList.add('slave_js_parsed');
+                Log.stageList.add('slaveActiveJsParsed');
+                Log.stageList.store('slaveActiveJsParsed');
+            },
+            slaveActiveStart() {
+                this.global.pageInitRenderStart = data.pageInitRenderStart;
+                Log.perfLogList.add('fe_slave_dispatch_start');
+                Log.stageList.add('slaveActiveStart');
+                Log.stageList.store('slaveActiveStart');
+            },
+            slaveActivePageLoadStart() {
+                Log.perfLogList.add('fe_start_load_css');
+                Log.perfLogList.add('fe_start_load_app_css');
+                Log.perfLogList.add('fe_start_load_page_css');
+                Log.stageList.add('slaveActivePageLoadStart');
+                Log.stageList.store('slaveActivePageLoadStart');
+            },
+            slaveActiveSwanJsLoadStart() {
+                Log.perfLogList.add('fe_start_load_swan_js');
+                Log.stageList.add('slaveActiveSwanJsLoadStart');
+                Log.stageList.store('slaveActiveSwanJsLoadStart');
+            },
+            slaveActiveCssLoaded() {
+                Log.perfLogList.add('fe_end_load_css');
+                Log.stageList.add('slaveActiveCssLoaded');
+                Log.stageList.store('slaveActiveCssLoaded');
+            },
+            slaveActiveAppCssLoaded() {
+                Log.perfLogList.add('fe_end_load_app_css');
+                Log.stageList.store('slaveActiveAppCssLoaded');
+            },
+            slaveActivePageCssLoaded() {
+                Log.perfLogList.add('fe_end_load_page_css');
+                Log.stageList.store('slaveActivePageCssLoaded');
+            },
+            slaveActiveSwanJsLoaded() {
+                Log.perfLogList.add('fe_end_load_swan_js');
+                Log.stageList.add('slaveActiveSwanJsLoaded');
+                Log.stageList.store('slaveActiveSwanJsLoaded');
+                Log.perfLogList.__list.push({
+                    actionId: 'fe_end_init_swan_js',
+                    timestamp: this.global.FeSlaveSwanJsInitEnd
+                });
+                Log.perfLogList.__list.push({
+                    actionId: 'fe_end_parse_swan_js',
+                    timestamp: this.global.FeSlaveSwanJsParseEnd
+                });
+            },
+            slaveActiveRealGetData() {
+                Log.perfLogList.add('fe_slave_real_get_data');
+                Log.stageList.add('slaveActiveRealGetData');
+                Log.stageList.store('slaveActiveRealGetData');
+            },
+            slaveActiveNoticeMasterSlaveloaded() {
+                Log.perfLogList.add('slave_first_loaded');
+                Log.stageList.add('slaveActiveNoticeMasterSlaveloaded');
+                Log.stageList.store('slaveActiveNoticeMasterSlaveloaded');
+                Log.stageList.send();
+            },
+            slaveActiveReceiveInitData() {
+                Log.perfLogList.add('slave_first_recieve_data');
+                Log.stageList.add('slaveActiveReceiveInitData');
+                Log.stageList.store('slaveActiveReceiveInitData');
+            },
+            slaveActiveRenderStart() {
+                Log.perfLogList.add('fe_first_render_start');
+                Log.stageList.add('slaveActiveRenderStart');
+                Log.stageList.store('slaveActiveRenderStart');
+            },
+            slaveActiveRenderEnd() {
+                this.swaninterface.invoke('postMessage', 'master', {
+                    type: 'slavePageComponentAttached',
+                    value: {}
+                });
+                Log.perfLogList.add('slave_first_rendered');
+                Log.stageList.add('slaveActiveRenderEnd');
+                Log.stageList.store('slaveActiveRenderEnd');
+                Log.stageList.send();
+                Log.perfLogList.__list.push({
+                    actionId: 'fe_slave_preload_start',
+                    timestamp: this.global.feSlavePreloadStart
+                }, {
+                    actionId: 'fe_slave_preload_end',
+                    timestamp: this.global.feSlavePreloadEnd
+                });
+                let ua = this.global.navigator.userAgent;
+                if (ua.match(/Android|Baidu; P1/g)) {
+                    this.__fpSend = false;
+                    setTimeout(() =&gt; {
+                        if (!this.__fpSend) {
+                            this.__fpSend = true;
+                            this.sendDataToMaster('sendLogMessage', {
+                                perfLogList: Log.perfLogList.__list
+                            });
+                            return false;
+                        }
+                    }, 3000);
+                }
+                else {
+                    this.sendDataToMaster('sendLogMessage', {
+                        perfLogList: Log.perfLogList.__list
+                    });
+                }
+            },
+            slaveFeFirstPaint() {
+                Log.stageList.store('slaveFeFirstPaint');
+                if (!this.__fpSend &amp;&amp; data.eventId !== 'nreach') {
+                    this.__fpSend = true;
+                    Log.perfLogList.__list.push({
+                        actionId: 'fe_first_paint',
+                        timestamp: data.timeStamp
+                    });
+                    this.sendDataToMaster('sendLogMessage', {
+                        perfLogList: Log.perfLogList.__list
+                    });
+                }
+                if (!this.reportFPData) {
+                    this.reportFPData = true;
+                    this.performanceLog.sendFPLog(data);
+                }
+            },
+            customComponentStatistics(data) {
+                this.statistics.customComponentStatistics({},
+                    {}, data);
+            }
+        };
+&nbsp;
+        // 反射框架slave事件
+        try {
+            slaveEventsMap[eventName] &amp;&amp; slaveEventsMap[eventName].call(this, data);
+        } catch (err) {
+            console.error(`execute slave event '${eventName}' error!`);
+        }
+    }
+&nbsp;
+    /**
+     * 发送数据到master
+     *
+     * @param {string} type - 事件类型
+     * @param {*} value - 需发送的数据
+     */
+    sendDataToMaster(type, value) {
+        this.swaninterface.invoke('postMessage', 'master', {
+            type,
+            value
+        });
+    }
+&nbsp;
+    /**
+     * 对于maste和slave需要特殊监听的事件处理
+     *
+     * @param {string} role - 角色(master|slave)
+     */
+    logEventsSpecialListener(role) {
+        if (role === 'master') {
+            this.swaninterface.invoke('onMessage', data =&gt; {
+                if (!data) {
+                    return;
+                }
+                if (data.type === 'slavePageComponentAttached') {
+                    global.rainMonitorEndtime = Date.now();
+                }
+&nbsp;
+                // 这里判断是否能发送数据需要端上传来的数据判断，即log.logOnNewScheme
+                if ((Log.logMessageSended === false || Log.logOnNewScheme === true)
+                    &amp;&amp; data.type === 'sendLogMessage') {
+                    Log.logMessageSended = true;
+&nbsp;
+                    // 冷启动情况下需要添加预加载的日志
+                    <span class="missing-if-branch" title="else path not taken" >E</span>if (!Log.logOnNewScheme) {
+                        Log.perfLogList.__list.push({
+                            actionId: 'fe_master_preload_start',
+                            timestamp: this.global.feMasterPreloadStart
+                        }, {
+                            actionId: 'fe_master_preload_end',
+                            timestamp: this.global.feMasterPreloadEnd
+                        });
+                    }
+&nbsp;
+                    Log.logOnNewScheme = false;
+&nbsp;
+                    // 在打单个点的时候还是先存在__list里面，这样改动量小一些，尽量复用之前的逻辑
+                    // 日志分为master记录的和slave上报的两部分
+                    Log.perfLogList.__list = Log.perfLogList.__list.concat(data.value.perfLogList);
+                    this.global.rainMonitorEndtime = Date.now();
+                    this.performanceLog.sendLogMessage(Log.perfLogList.__list || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>;
+                    data.value.perfLogList.forEach(item =&gt; {
+                        if (item['actionId'] === 'slave_first_rendered') {
+                            this.global.masterManager.perfAudit['slave_first_rendered'] = item['timestamp'];
+                        }
+                    });
+                } else if (data.type === 'sendLogMessage') {
+                    data.value.perfLogList.forEach(item =&gt; {
+                        if (item['actionId'] === 'slave_first_rendered') {
+                            this.global.masterManager.perfAudit['slave_navigator_rendered'] = item['timestamp'];
+                        }
+                    });
+                }
+            });
+        } else {
+            const slaveObserver = swanGlobal ? _naSwan : this.global.document;
+            slaveObserver.addEventListener('message', e =&gt; {
+                if (typeof e.message === 'string' &amp;&amp; e.message.indexOf('initData') &gt;= 0) {
+                    Log.perfLogList.add('fe_slave_real_get_data');
+                }
+            });
+        }
+    }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Apr 17 2019 17:06:00 GMT+0800 (CST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
